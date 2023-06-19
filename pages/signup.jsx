@@ -1,24 +1,25 @@
-import Layout from '../components/layout'
-import { getCookie } from 'cookies-next';
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { getCookie } from "cookies-next";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-export default function SignupPage( {username} ) {
+import Layout from "../components/layout";
+
+export default function SignupPage() {
     const router = useRouter()
     const { msg } = router.query
     return (
         <Layout pageTitle="Signup">
             <Link href="/">Home</Link><br/>
-            {msg ?
-                <h3 className="red">{msg}</h3>
+            { msg ?
+                <h3 className="red">{ msg }</h3>
             :
                 <></>
             }
             <h2>Sign up</h2>
-            <form action='/api/signup' method='POST'>
-                <input minLength="3" name="username" id="username" type="text" placeholder='username' required></input><br/>
-                <input minLength="5" name="password" id="password" type="password" placeholder='password' required></input><br/>
-                <input minLength="5" name="passwordagain" id="passwordagain" type="password" placeholder='password again' required></input><br/>
+            <form action="/api/signup" method="POST">
+                <input minLength="3" name="email" id="email" type="text" placeholder="email" required></input><br/>
+                <input minLength="5" name="password" id="password" type="password" placeholder="password" required></input><br/>
+                <input minLength="5" name="passwordagain" id="passwordagain" type="password" placeholder="password again" required></input><br/>
                 <input type="submit" value="Signup"/>
             </form>
         </Layout>
@@ -28,8 +29,9 @@ export default function SignupPage( {username} ) {
 export async function getServerSideProps(context) {
     const req = context.req
     const res = context.res
-    var username = getCookie('username', { req, res });
-    if (username != undefined){
+    let email = getCookie("email", { req, res });
+    let token = getCookie("token", { req, res });
+    if (email && token) {
         return {
             redirect: {
                 permanent: false,
@@ -37,5 +39,10 @@ export async function getServerSideProps(context) {
             }
         }
     }
-    return { props: {username:false} };
+    return { 
+        props: {
+            email: false,
+            token: false,
+        } 
+    };
 };

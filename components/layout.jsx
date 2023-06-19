@@ -1,9 +1,9 @@
 import Head from 'next/head';
 
-export const siteTitle = "Login Signup Nextjs";
+export const siteTitle = "Login Signup with Blockchain";
 
 export default function Layout({ pageTitle, children }) {
-  const title = "Login Signup Nextjs";
+  const title = "Login Signup with Blockchain";
   return (
     <div>
       <Head>
