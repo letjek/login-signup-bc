@@ -30,7 +30,7 @@ export default async function handler(req, res) {
         token = json.access_token;
         cookies.set("email", email);
         cookies.set("token", token, {
-          maxAge: new Date().getTime() + 3600000,
+          expires: new Date(Date.now() + 3600000),
         });
         // console.log("COOKIES: ", cookies);
         res.redirect("/");
