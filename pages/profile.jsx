@@ -7,7 +7,7 @@ export default function ProfilePage({ email, token }) {
     return (
         <Layout pageTitle="Profile">
             <Link href="/">Home</Link><br/>
-            <h2>{email}"s TOKEN:</h2>
+            <h2>{email}'s TOKEN:</h2>
             <p><strong>{ token }</strong></p>
         </Layout>
     );
