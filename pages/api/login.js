@@ -31,7 +31,6 @@ export default async function handler(req, res) {
         cookies.set("email", email);
         cookies.set("token", token, {
           maxAge: new Date().getTime() + 3600000,
-          httpOnly: true,
         });
         // console.log("COOKIES: ", cookies);
         res.redirect("/");
