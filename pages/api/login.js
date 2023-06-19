@@ -30,10 +30,7 @@ export default async function handler(req, res) {
         token = json.access_token;
         cookies.set("email", email);
         cookies.set("token", token, {
-          httpOnly: true,
           maxAge: new Date().getTime() + 3600000,
-          sameSite: "strict",
-          secure: true,
         });
         // console.log("COOKIES: ", cookies);
         res.redirect("/");
