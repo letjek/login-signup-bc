@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     const guess = req.body["password"];
 
     let token = null;
-    
+
     const result = await fetch(`${process.env.BACKEND_URL}/login`, {
       method: "POST",
       headers: {
@@ -29,7 +29,12 @@ export default async function handler(req, res) {
         const cookies = new Cookies(req, res);
         token = json.access_token;
         cookies.set("email", email);
-        cookies.set("token", token);
+        cookies.set("token", token, {
+          httpOnly: true,
+          maxAge: new Date().getTime() + 3600000,
+          sameSite: "strict",
+          secure: true,
+        });
         // console.log("COOKIES: ", cookies);
         res.redirect("/");
     } else {
